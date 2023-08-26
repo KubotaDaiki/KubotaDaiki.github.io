@@ -11404,7 +11404,7 @@ p.lead {
 }
 
 .dev-icons {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 section.resume-section {
@@ -11439,7 +11439,7 @@ section.resume-section .resume-section-content {
 }
 
 .l-wrapper_01 {
-  width: 33%;
+  width: 350px;
 }
 
 .l-wrapper_01:hover {
@@ -11527,4 +11527,12 @@ section.resume-section .resume-section-content {
 .button_01.-compact:hover,
 .button_01.-compact:focus {
   background-color: #6bb6ff;
+}
+
+h1{
+  margin-bottom: 0.1rem;
+}
+
+.dev-icons span{
+  vertical-align: middle;
 }
