@@ -198,7 +198,7 @@ export default function Home({ page }) {
         </section>
       </div>
       {/* <!-- Bootstrap core JS--> */}
-      <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></Script>
+      <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" strategy="beforeInteractive"></Script>
     </>
   );
 }
