@@ -6,7 +6,7 @@ export default function Home({ page }) {
   return (
     <>
       <Head>
-        <title>Kubota's Portfolio</title>
+        <title>Kubota&apos;s Portfolio</title>
         <link rel="icon" type="image/x-icon" href={page.favicon.url} />
       </Head>
       {/* <!-- Navigation--> */}
