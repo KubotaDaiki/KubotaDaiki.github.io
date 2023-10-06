@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { client } from "../libs/client";
 import {} from "../libs/scripts.js";
+import Image from "next/image";
+import Script from "next/script";
 
 export default function Home({ page }) {
   return (
@@ -17,9 +19,11 @@ export default function Home({ page }) {
         <a className="navbar-brand js-scroll-trigger" href="#page-top">
           <span className="d-block d-lg-none">久保田大貴</span>
           <span className="d-none d-lg-block">
-            <img
+            <Image
               className="img-fluid img-profile rounded-circle mx-auto mb-2"
               src={page.profile_icon.url}
+              width={145}
+              height={145}
               alt="..."
             />
           </span>
@@ -88,7 +92,7 @@ export default function Home({ page }) {
                   title={icon.name}
                   key={icon.id}
                 >
-                  <img src={icon.img.url} />
+                  <Image src={icon.img.url} width={24} height={24} />
                 </a>
               ))}
             </div>
@@ -124,7 +128,11 @@ export default function Home({ page }) {
                 {page.certification.map((certification) => (
                   <li className="mb-1" key={certification.id}>
                     <span className="fa-li">
-                      <img src={certification.img.url} width={15}></img>
+                      <Image
+                        src={certification.img.url}
+                        width={15}
+                        height={15}
+                      ></Image>
                     </span>
                     {certification.name}
                   </li>
@@ -137,7 +145,11 @@ export default function Home({ page }) {
                 {page.achievement.map((achievement) => (
                   <li className="mb-2" key={achievement.id}>
                     <span className="fa-li">
-                      <img src={achievement.img.url} width={20}></img>
+                      <Image
+                        src={achievement.img.url}
+                        width={20}
+                        height={20}
+                      ></Image>
                     </span>
                     {achievement.name}
                   </li>
@@ -159,10 +171,12 @@ export default function Home({ page }) {
                     <div className="card__header_01">
                       <p className="card__title_01">{works.name}</p>
                       <figure className="card__thumbnail_01">
-                        <img
+                        <Image
                           src={works.img.url}
                           alt="サムネイル"
                           className="card__image_01"
+                          width={350}
+                          height={188}
                         />
                       </figure>
                     </div>
@@ -184,7 +198,7 @@ export default function Home({ page }) {
         </section>
       </div>
       {/* <!-- Bootstrap core JS--> */}
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+      <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></Script>
     </>
   );
 }
