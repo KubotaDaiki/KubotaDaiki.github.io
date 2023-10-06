@@ -164,41 +164,56 @@ export default function Home({ page }) {
         <section className="resume-section" id="works">
           <div className="resume-section-content">
             <h2 className="mb-5">制作物</h2>
-            <div className="card-cotent">
+            <div className="card-contents">
               {page.works.map((works) => (
-                <div className="l-wrapper_01" key={works.id}>
-                  <article className="card_01">
-                    <div className="card__header_01">
-                      <p className="card__title_01">{works.name}</p>
-                      <figure className="card__thumbnail_01">
+                <article className="card-content" key={works.id}>
+                  <label className="open" htmlFor={works.id}>
+                    <Image
+                      src={works.img.url}
+                      alt="サムネイル"
+                      className="card-image"
+                      width={320}
+                      height={180}
+                    />
+                  </label>
+                  <p className="card-title">{works.name}</p>
+
+                  <input type="checkbox" id={works.id}></input>
+                  <div className="overlay">
+                    <div className="window">
+                      <label className="close" htmlFor={works.id}>
+                        ×
+                      </label>
+                      <h3>{works.name}</h3>
+                      <div className="window-main">
+                        <div>
+                          <p>{works.description}</p>
+                          <a href={works.url} className="button">
+                            GitHub
+                          </a>
+                        </div>
                         <Image
                           src={works.img.url}
                           alt="サムネイル"
                           className="card__image_01"
-                          width={350}
-                          height={188}
+                          width={640}
+                          height={360}
+                          sizes="(max-width:600px) 90vw,(max-width:1200px) 70vw,50vw"
                         />
-                      </figure>
+                      </div>
                     </div>
-                    <div className="card__body_01">
-                      <p className="card__text2_01">{works.description}</p>
-                    </div>
-                    <div className="card__footer_01">
-                      <p className="card__text_01">
-                        <a href={works.url} className="button_01 -compact">
-                          GitHub
-                        </a>
-                      </p>
-                    </div>
-                  </article>
-                </div>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
       </div>
       {/* <!-- Bootstrap core JS--> */}
-      <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" strategy="beforeInteractive"></Script>
+      <Script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        strategy="beforeInteractive"
+      ></Script>
     </>
   );
 }
