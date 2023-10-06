@@ -186,8 +186,12 @@ export default function Home({ page }) {
                       </label>
                       <h3>{works.name}</h3>
                       <div className="window-main">
-                        <div>
-                          <p>{works.description}</p>
+                        <div className="window-left">
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: works.rich_text,
+                            }}
+                          ></div>
                           <a href={works.url} className="button">
                             GitHub
                           </a>
