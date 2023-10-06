@@ -205,6 +205,7 @@ address {
 ol,
 ul {
   padding-left: 2rem;
+  list-style: none;
 }
 
 ol,
@@ -11915,8 +11916,6 @@ h1 {
   vertical-align: middle;
 }
 
-img {
-  width: 320px;
-  height: 190px;
-  object-fit: cover;
+.fa-li{
+  margin: 5px;
 }
