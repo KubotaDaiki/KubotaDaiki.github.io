@@ -11,6 +11,16 @@ export default function Home({ page }) {
         <title>Kubota&apos;s Portfolio</title>
         <link rel="icon" type="image/x-icon" href={page.favicon.url} />
       </Head>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'GA_MEASUREMENT_ID');
+        `}
+      </Script>
       {/* <!-- Navigation--> */}
       <nav
         className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
