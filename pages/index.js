@@ -1,16 +1,80 @@
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Stack,
+  Typography,
+  CssBaseline,
+  Container,
+  Link,
+} from "@mui/material/";
 import Head from "next/head";
-import { client } from "../libs/client";
-import {} from "../libs/scripts.js";
 import Image from "next/image";
 import Script from "next/script";
+import * as React from "react";
+import { client } from "../libs/client";
+import CardDialog from "./components/CardDialog";
+import Section from "./components/Section";
+import Sidebar from "./components/Sidebar";
+import SocialIcon from "./components/SocialIcon";
+import SubSection from "./components/SubSection";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export default function Home({ page }) {
+  const [open, setOpen] = React.useState([
+    ...Array(page.works.length).fill(false),
+  ]);
+
+  const handleClickOpen = (index) => {
+    setOpen(open.map((_, i) => (i === index ? true : false)));
+  };
+  const handleClose = () => {
+    setOpen(open.map(() => false));
+  };
+
+  const theme = createTheme({
+    typography: {
+      fontFamily: ['"Noto Sans JP"', "Arial", "sans-serif"].join(","),
+      fontSize: 16,
+
+      p: { color: "#6b767c" },
+      h1: { fontSize: 80 },
+      h2: { fontSize: 48, marginTop: 40, marginBottom: 20 },
+      h3: { fontSize: 26 },
+    },
+    palette: {
+      primary: {
+        main: "#282828",
+      },
+      secondary: {
+        main: "#495057",
+      },
+      accent: {
+        main: "#6283C2",
+      },
+      white: {
+        main: "#dddddd",
+      },
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Head>
         <title>Kubota&apos;s Portfolio</title>
         <link rel="icon" type="image/x-icon" href={page.favicon.url} />
       </Head>
+      <CssBaseline />
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-3CGJWZE398" />
       <Script id="google-analytics">
         {`
@@ -21,214 +85,180 @@ export default function Home({ page }) {
           gtag('config', 'G-3CGJWZE398');
         `}
       </Script>
-      {/* <!-- Navigation--> */}
-      <nav
-        className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
-        id="sideNav"
-      >
-        <a className="navbar-brand js-scroll-trigger" href="#page-top">
-          <span className="d-block d-lg-none">久保田大貴</span>
-          <span className="d-none d-lg-block">
-            <Image
-              className="img-fluid img-profile rounded-circle mx-auto mb-2"
-              src={page.profile_icon.url}
-              width={145}
-              height={145}
-              alt="..."
-            />
-          </span>
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#top">
-                トップ
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#skills">
-                スキル
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link js-scroll-trigger"
-                href="#certification-and-achievement"
+      <Box sx={{ display: "flex" }}>
+        <Sidebar>
+          <Avatar
+            src={page.profile_icon.url}
+            sx={{
+              width: 150,
+              height: 150,
+              border: 6,
+              borderColor: "#5e5e5e",
+              margin: 3,
+            }}
+          />
+          {["トップ", "スキル", "資格&実績", "制作物"].map((text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton
+                href={"#" + text}
+                sx={{
+                  "&:hover": {
+                    bgcolor: "accent.main",
+                  },
+                }}
               >
-                資格&実績
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#works">
-                制作物
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <div className="container-fluid p-0">
-        {/* <!-- トップ--> */}
-        <section className="resume-section" id="top">
-          <div className="resume-section-content">
-            <h1>{page.name}</h1>
-            <p
-              className="mb-4 ms-1"
-              style={{ color: "#b8b8b8", fontSize: "1rem" }}
-            >
+                <ListItemText primary={text} sx={{ textAlign: "center" }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </Sidebar>
+        <Box sx={{ width: "100%" }}>
+          <Section id="トップ" height="100vh">
+            <Typography variant="h1">{page.name}</Typography>
+            <p style={{ color: "#b8b8b8", fontSize: "1rem" }}>
               Email: {page.email}
             </p>
-            <div
-              className="mb-5"
+            <Typography
+              variant="p"
+              component="div"
               dangerouslySetInnerHTML={{ __html: page.self_introduction }}
-            ></div>
-
-            <div className="social-icons">
+            />
+            <Stack spacing={3} direction="row">
               {page.icon.map((icon) => (
-                <a
-                  className="social-icon"
+                <SocialIcon
                   href={icon.url}
-                  title={icon.name}
+                  imgUrl={icon.img.url}
                   key={icon.id}
-                >
-                  <Image src={icon.img.url} width={24} height={24} />
-                </a>
+                />
               ))}
-            </div>
-          </div>
-        </section>
-        <hr className="m-0" />
-
-        {/* <!-- スキル--> */}
-        <section className="resume-section" id="skills">
-          <div className="resume-section-content">
-            <h2 className="mb-5">スキル</h2>
-            <div className="subheading mb-3">プログラミング言語＆ツール</div>
-            <ul className="dev-icons">
+            </Stack>
+          </Section>
+          <Section id="スキル">
+            <Typography variant="h2">スキル</Typography>
+            <Typography variant="h3" sx={{ mb: 2 }}>
+              プログラミング言語＆ツール
+            </Typography>
+            <List>
               {page.skill.map((skill) => (
-                <li className="list-inline" key={skill.id}>
-                  <span className="fa-li">
-                    <i className={skill.name}></i>
-                  </span>
-                  <span className="skill-description">{skill.description}</span>
-                </li>
+                <ListItem key={skill.id}>
+                  <Typography
+                    variant="p"
+                    className={skill.name}
+                    sx={{ fontSize: 34, mx: 2 }}
+                  ></Typography>
+                  <Typography variant="p">{skill.description}</Typography>
+                </ListItem>
               ))}
-            </ul>
-          </div>
-        </section>
-        <hr className="m-0" />
-
-        {/* <!-- 資格&実績--> */}
-        <section className="resume-section" id="certification-and-achievement">
-          <div className="resume-section-content">
-            <div className="mb-5">
-              <h2 className="mb-5">資格</h2>
-              <ul className="fa-ul mb-0">
+            </List>
+          </Section>
+          <Section id="資格&実績">
+            <SubSection>
+              <Typography variant="h2">資格</Typography>
+              <List>
                 {page.certification.map((certification) => (
-                  <li className="mb-1" key={certification.id}>
-                    <span className="fa-li">
+                  <ListItem key={certification.id}>
+                    <Box sx={{ mr: 1 }}>
                       <Image
                         src={certification.img.url}
                         width={15}
                         height={15}
+                        alt="check"
                       ></Image>
-                    </span>
-                    {certification.name}
-                  </li>
+                    </Box>
+                    <Typography variant="p">{certification.name}</Typography>
+                  </ListItem>
                 ))}
-              </ul>
-            </div>
-            <div className="mb-5">
-              <h2 className="mb-5">実績</h2>
-              <ul className="fa-ul mb-0">
+              </List>
+            </SubSection>
+            <SubSection>
+              <Typography variant="h2">実績</Typography>
+              <List>
                 {page.achievement.map((achievement) => (
-                  <li className="mb-2" key={achievement.id}>
-                    <span className="fa-li">
+                  <ListItem key={achievement.id}>
+                    <Box sx={{ mr: 1 }}>
                       <Image
                         src={achievement.img.url}
                         width={20}
                         height={20}
+                        alt="achievement"
                       ></Image>
-                    </span>
-                    {achievement.name}
-                  </li>
+                    </Box>
+                    <Typography variant="p">{achievement.name}</Typography>
+                  </ListItem>
                 ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-        <hr className="m-0" />
-
-        {/* <!-- 制作物--> */}
-        <section className="resume-section" id="works">
-          <div className="resume-section-content">
-            <h2 className="mb-5">制作物</h2>
-            <div className="card-contents">
-              {page.works.map((works) => (
-                <article className="card-content" key={works.id}>
-                  <label className="open" htmlFor={works.id}>
-                    <Image
-                      src={works.img.url}
-                      alt="サムネイル"
-                      className="card-image"
-                      width={320}
-                      height={180}
-                    />
-                  </label>
-                  <p className="card-title">{works.name}</p>
-
-                  <input type="checkbox" id={works.id}></input>
-                  <div className="overlay">
-                    <div className="window">
-                      <label className="close" htmlFor={works.id}>
-                        ×
-                      </label>
-                      <h3>{works.name}</h3>
-                      <div className="window-main">
-                        <div className="window-left">
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: works.rich_text,
-                            }}
-                          ></div>
-                          <a href={works.url} className="button">
-                            GitHub
-                          </a>
-                        </div>
-                        <Image
-                          src={works.img.url}
-                          alt="サムネイル"
-                          className="card__image_01"
-                          width={640}
-                          height={360}
-                          sizes="(max-width:600px) 90vw,(max-width:1200px) 70vw,50vw"
+              </List>
+            </SubSection>
+          </Section>
+          <Section id="制作物">
+            <Typography variant="h2">制作物</Typography>
+            <Grid
+              container
+              spacing={3}
+              columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+              sx={{ pl: 6, pr: 10 }}
+            >
+              {page.works.map((work, index) => {
+                return (
+                  <Grid item xs={1} key={work.id}>
+                    <Card sx={{ aspectRatio: 1.7777777 }}>
+                      <CardActionArea
+                        onClick={() => handleClickOpen(index)}
+                        sx={{ height: "100%" }}
+                      >
+                        <CardMedia
+                          sx={{ height: "100%" }}
+                          image={work.img.url}
                         />
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      </div>
-      {/* <!-- Bootstrap core JS--> */}
-      <Script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        strategy="beforeInteractive"
-      ></Script>
-    </>
+                        <CardContent></CardContent>
+                      </CardActionArea>
+                    </Card>
+                    <Typography
+                      color="text.secondary"
+                      align="center"
+                      sx={{ mt: 1 }}
+                    >
+                      {work.name}
+                    </Typography>
+                    <CardDialog open={open[index]} handleClose={handleClose}>
+                      <Typography variant="h3">{work.name}</Typography>
+                      <Grid
+                        container
+                        spacing={2}
+                        direction="row-reverse"
+                        columns={{ xs: 1, md: 2 }}
+                      >
+                        <Grid item xs={1}>
+                          <Image
+                            src={work.img.url}
+                            alt="works"
+                            width={1920}
+                            height={1080}
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                            }}
+                          />
+                        </Grid>
+                        <Grid item xs={1}>
+                          <Typography
+                            variant="p"
+                            component="div"
+                            dangerouslySetInnerHTML={{
+                              __html: work.rich_text,
+                            }}
+                          />
+                          <Link href={work.url}>GitHub</Link>
+                        </Grid>
+                      </Grid>
+                    </CardDialog>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Section>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
 
