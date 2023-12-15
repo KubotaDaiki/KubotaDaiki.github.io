@@ -6,7 +6,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.microcms-assets.io",
+        hostname: "images.ctfassets.net",
       },
     ],
   },

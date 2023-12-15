@@ -30,17 +30,24 @@ import SocialIcon from "./components/SocialIcon";
 import SubSection from "./components/SubSection";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-export default function Home({ page }) {
-  const [open, setOpen] = React.useState([
-    ...Array(page.works.length).fill(false),
-  ]);
+export default function Home({ data }) {
+  const top = data.items.filter(
+    (item) => item.sys.contentType.sys.id === "top"
+  )[0];
+  const skills = data.items.filter(
+    (item) => item.sys.contentType.sys.id === "skills"
+  )[0];
+  const certifications = data.items.filter(
+    (item) => item.sys.contentType.sys.id === "certification"
+  );
+  const achievements = data.items.filter(
+    (item) => item.sys.contentType.sys.id === "achievement"
+  );
+  const works = data.items.filter(
+    (item) => item.sys.contentType.sys.id === "work"
+  );
+  const [open, setOpen] = React.useState([...Array(works.length).fill(false)]);
 
-  const handleClickOpen = (index) => {
-    setOpen(open.map((_, i) => (i === index ? true : false)));
-  };
-  const handleClose = () => {
-    setOpen(open.map(() => false));
-  };
 
   const theme = createTheme({
     typography: {
@@ -72,7 +79,11 @@ export default function Home({ page }) {
     <ThemeProvider theme={theme}>
       <Head>
         <title>Kubota&apos;s Portfolio</title>
-        <link rel="icon" type="image/x-icon" href={page.favicon.url} />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href={top.fields.favicon.fields.file.url}
+        />
       </Head>
       <CssBaseline />
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-3CGJWZE398" />
@@ -88,7 +99,7 @@ export default function Home({ page }) {
       <Box sx={{ display: "flex" }}>
         <Sidebar>
           <Avatar
-            src={page.profile_icon.url}
+            src={top.fields.profile_icon.fields.file.url}
             sx={{
               width: 150,
               height: 150,
@@ -114,21 +125,23 @@ export default function Home({ page }) {
         </Sidebar>
         <Box sx={{ width: "100%" }}>
           <Section id="トップ" height="100vh">
-            <Typography variant="h1">{page.name}</Typography>
+            <Typography variant="h1">{top.fields.name}</Typography>
             <p style={{ color: "#b8b8b8", fontSize: "1rem" }}>
-              Email: {page.email}
+              Email: {top.fields.email}
             </p>
             <Typography
               variant="p"
               component="div"
-              dangerouslySetInnerHTML={{ __html: page.self_introduction }}
-            />
+              sx={{ "whiteSpace": "pre-wrap", mb: 3 }}
+            >
+              {top.fields.self_introduction}
+            </Typography>
             <Stack spacing={3} direction="row">
-              {page.icon.map((icon) => (
+              {top.fields.social_icons.map((icon) => (
                 <SocialIcon
-                  href={icon.url}
-                  imgUrl={icon.img.url}
-                  key={icon.id}
+                  href={icon.fields.url}
+                  imgUrl={icon.fields.img.fields.file.url}
+                  key={icon.sys.id}
                 />
               ))}
             </Stack>
@@ -139,14 +152,16 @@ export default function Home({ page }) {
               プログラミング言語＆ツール
             </Typography>
             <List>
-              {page.skill.map((skill) => (
-                <ListItem key={skill.id}>
+              {skills.fields.skills.map((skill) => (
+                <ListItem key={skill.sys.id}>
                   <Typography
                     variant="p"
-                    className={skill.name}
+                    className={skill.fields.class}
                     sx={{ fontSize: 34, mx: 2 }}
                   ></Typography>
-                  <Typography variant="p">{skill.description}</Typography>
+                  <Typography variant="p">
+                    {skill.fields.description}
+                  </Typography>
                 </ListItem>
               ))}
             </List>
@@ -155,17 +170,19 @@ export default function Home({ page }) {
             <SubSection>
               <Typography variant="h2">資格</Typography>
               <List>
-                {page.certification.map((certification) => (
-                  <ListItem key={certification.id}>
+                {certifications.map((certification) => (
+                  <ListItem key={certification.sys.id}>
                     <Box sx={{ mr: 1 }}>
                       <Image
-                        src={certification.img.url}
+                        src={certification.fields.icon.fields.file.url}
                         width={15}
                         height={15}
                         alt="check"
                       ></Image>
                     </Box>
-                    <Typography variant="p">{certification.name}</Typography>
+                    <Typography variant="p">
+                      {certification.fields.name}
+                    </Typography>
                   </ListItem>
                 ))}
               </List>
@@ -173,17 +190,19 @@ export default function Home({ page }) {
             <SubSection>
               <Typography variant="h2">実績</Typography>
               <List>
-                {page.achievement.map((achievement) => (
-                  <ListItem key={achievement.id}>
+                {achievements.map((achievement) => (
+                  <ListItem key={achievement.sys.id}>
                     <Box sx={{ mr: 1 }}>
                       <Image
-                        src={achievement.img.url}
+                        src={`https:${achievement.fields.icon.fields.file.url}`}
                         width={20}
                         height={20}
                         alt="achievement"
                       ></Image>
                     </Box>
-                    <Typography variant="p">{achievement.name}</Typography>
+                    <Typography variant="p">
+                      {achievement.fields.name}
+                    </Typography>
                   </ListItem>
                 ))}
               </List>
@@ -197,17 +216,21 @@ export default function Home({ page }) {
               columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
               sx={{ pl: 6, pr: 10 }}
             >
-              {page.works.map((work, index) => {
+              {works.map((work, index) => {
                 return (
-                  <Grid item xs={1} key={work.id}>
+                  <Grid item xs={1} key={work.sys.id}>
                     <Card sx={{ aspectRatio: 1.7777777 }}>
                       <CardActionArea
-                        onClick={() => handleClickOpen(index)}
+                        onClick={() =>
+                          setOpen(
+                            open.map((_, i) => (i === index ? true : false))
+                          )
+                        }
                         sx={{ height: "100%" }}
                       >
                         <CardMedia
                           sx={{ height: "100%" }}
-                          image={work.img.url}
+                          image={work.fields.img.fields.file.url}
                         />
                         <CardContent></CardContent>
                       </CardActionArea>
@@ -217,10 +240,13 @@ export default function Home({ page }) {
                       align="center"
                       sx={{ mt: 1 }}
                     >
-                      {work.name}
+                      {work.fields.name}
                     </Typography>
-                    <CardDialog open={open[index]} handleClose={handleClose}>
-                      <Typography variant="h3">{work.name}</Typography>
+                    <CardDialog
+                      open={open[index]}
+                      handleClose={() => setOpen(open.map(() => false))}
+                    >
+                      <Typography variant="h3">{work.fields.name}</Typography>
                       <Grid
                         container
                         spacing={2}
@@ -229,7 +255,7 @@ export default function Home({ page }) {
                       >
                         <Grid item xs={1}>
                           <Image
-                            src={work.img.url}
+                            src={`https:${work.fields.img.fields.file.url}`}
                             alt="works"
                             width={1920}
                             height={1080}
@@ -243,11 +269,11 @@ export default function Home({ page }) {
                           <Typography
                             variant="p"
                             component="div"
-                            dangerouslySetInnerHTML={{
-                              __html: work.rich_text,
-                            }}
-                          />
-                          <Link href={work.url}>GitHub</Link>
+                            sx={{ "whiteSpace": "pre-wrap", mt: 3 }}
+                          >
+                            {work.fields.description}
+                          </Typography>
+                          <Link href={work.fields.github_url}>GitHub</Link>
                         </Grid>
                       </Grid>
                     </CardDialog>
@@ -264,10 +290,10 @@ export default function Home({ page }) {
 
 // データをテンプレートに受け渡す部分の処理を記述
 export const getStaticProps = async () => {
-  const data = await client.get({ endpoint: "top" });
+  const data = await client.getEntries().catch((err) => console.log(err));
   return {
     props: {
-      page: data,
+      data: data,
     },
   };
 };
