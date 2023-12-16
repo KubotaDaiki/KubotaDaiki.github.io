@@ -28,12 +28,16 @@ import Section from "./components/Section";
 import Sidebar from "./components/Sidebar";
 import SocialIcon from "./components/SocialIcon";
 import SubSection from "./components/SubSection";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  ThemeProvider,
+  createTheme,
+  responsiveFontSizes,
+} from "@mui/material/styles";
 
 export default function Home({ data }) {
   const top = contentfulFilter(data, "top")[0];
 
-  const theme = createTheme({
+  let theme = createTheme({
     typography: {
       fontFamily: ['"Noto Sans JP"', "Arial", "sans-serif"].join(","),
       fontSize: 16,
@@ -58,6 +62,7 @@ export default function Home({ data }) {
       },
     },
   });
+  theme = responsiveFontSizes(theme);
 
   return (
     <ThemeProvider theme={theme}>
@@ -162,7 +167,7 @@ function Skills({ data }) {
             <Typography
               variant="p"
               className={skill.fields.class}
-              sx={{ fontSize: 34, mx: 2 }}
+              sx={{ fontSize: 34, mr: 2 }}
             ></Typography>
             <Typography variant="p">{skill.fields.description}</Typography>
           </ListItem>
@@ -182,7 +187,7 @@ function CertAndAchievements({ data }) {
         <Typography variant="h2">資格</Typography>
         <List>
           {certifications.map((certification) => (
-            <ListItem key={certification.sys.id}>
+            <ListItem key={certification.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
               <Box sx={{ mr: 1 }}>
                 <Image
                   src={certification.fields.icon.fields.file.url}
@@ -200,7 +205,7 @@ function CertAndAchievements({ data }) {
         <Typography variant="h2">実績</Typography>
         <List>
           {achievements.map((achievement) => (
-            <ListItem key={achievement.sys.id}>
+            <ListItem key={achievement.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
               <Box sx={{ mr: 1 }}>
                 <Image
                   src={`https:${achievement.fields.icon.fields.file.url}`}
@@ -229,7 +234,7 @@ function Works({ data }) {
         container
         spacing={3}
         columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-        sx={{ pl: 6, pr: 10 }}
+        sx={{ px: { xs: 2, md: 6 } }}
       >
         {works.map((work, index) => {
           return (
@@ -255,7 +260,9 @@ function Works({ data }) {
                 open={open[index]}
                 handleClose={() => setOpen(open.map(() => false))}
               >
-                <Typography variant="h3">{work.fields.name}</Typography>
+                <Typography variant="h3" sx={{ mb: 3 }}>
+                  {work.fields.name}
+                </Typography>
                 <Grid
                   container
                   spacing={2}
@@ -278,7 +285,7 @@ function Works({ data }) {
                     <Typography
                       variant="p"
                       component="div"
-                      sx={{ whiteSpace: "pre-wrap", mt: 3 }}
+                      sx={{ whiteSpace: "pre-wrap", mb: 1 }}
                     >
                       {work.fields.description}
                     </Typography>
@@ -293,7 +300,6 @@ function Works({ data }) {
     </Section>
   );
 }
-
 
 function contentfulFilter(data, id) {
   return data.items.filter((item) => item.sys.contentType.sys.id === id);

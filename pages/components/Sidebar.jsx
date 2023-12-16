@@ -39,6 +39,7 @@ export default function ResponsiveDrawer({ children }) {
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
+          onClick={handleDrawerToggle}
           ModalProps={{
             keepMounted: true,
           }}
