@@ -133,11 +133,16 @@ function Skills({ skills }) {
             >
               <Stack spacing={2}>
                 <Stack spacing={2} direction={"row"} alignItems="center">
-                  <Typography
-                    variant="p"
-                    className={skill.fields.class}
-                    sx={{ fontSize: 34 }}
-                  ></Typography>
+                  <Image
+                    src={skill.fields.icon.fields.file.url}
+                    width={42}
+                    height={42}
+                    alt="skillIcon"
+                    style={{
+                      filter:
+                        "invert(29%) sepia(19%) saturate(296%) hue-rotate(169deg) brightness(90%) contrast(84%)",
+                    }}
+                  ></Image>
                   <Rating value={skill.fields.rank} readOnly />
                 </Stack>
                 <Typography variant="p" sx={{ whiteSpace: "pre-wrap" }}>
