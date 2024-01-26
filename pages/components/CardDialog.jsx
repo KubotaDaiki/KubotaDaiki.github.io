@@ -1,17 +1,12 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import { useMediaQuery } from "@mui/material";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import { useTheme } from "@mui/material/styles";
 
-export default function CardDialogs({ open, handleClose, children }) {
+export default function CardDialogs({ title, open, handleClose, children }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
@@ -19,9 +14,10 @@ export default function CardDialogs({ open, handleClose, children }) {
       onClose={handleClose}
       open={open}
       maxWidth="lg"
-      sx={{ p: 3 }}
+      sx={{ p: 1 }}
       fullScreen={fullScreen}
     >
+      <DialogTitle>{title}</DialogTitle>
       <IconButton
         aria-label="close"
         onClick={handleClose}
@@ -34,7 +30,12 @@ export default function CardDialogs({ open, handleClose, children }) {
       >
         <CloseIcon />
       </IconButton>
-      <DialogContent sx={{ height: "80vh" }}>{children}</DialogContent>
+      <DialogContent
+        dividers
+        sx={{ paddingX: { md: "50px" }, paddingY: "30px" }}
+      >
+        {children}
+      </DialogContent>
     </Dialog>
   );
 }

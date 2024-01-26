@@ -1,175 +1,194 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Stack,
-  Typography,
-  CssBaseline,
-  Container,
-  Link,
-} from "@mui/material/";
-import Head from "next/head";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Chip from "@mui/material/Chip";
+import CssBaseline from "@mui/material/CssBaseline";
+import Link from "@mui/material/Link";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Unstable_Grid2";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Image from "next/image";
-import Script from "next/script";
-import * as React from "react";
+import { useState } from "react";
 import { client } from "../libs/client";
+import Background from "./components/Background";
 import CardDialog from "./components/CardDialog";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import Section from "./components/Section";
-import Sidebar from "./components/Sidebar";
-import SocialIcon from "./components/SocialIcon";
-import SubSection from "./components/SubSection";
-import {
-  ThemeProvider,
-  createTheme,
-  responsiveFontSizes,
-} from "@mui/material/styles";
+import SkillCard from "./components/SkillCard";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ['"Noto Sans JP"', "Arial", "sans-serif"].join(","),
+  },
+  palette: {
+    primary: {
+      main: "#282828",
+    },
+    secondary: {
+      main: "#495057",
+    },
+    accent: {
+      main: "#6283C2",
+    },
+    white: {
+      main: "#eeeeee",
+    },
+  },
+});
 
 export default function Home({ data }) {
-  const top = contentfulFilter(data, "top")[0];
+  const skills = contentfulFilter(data, "skills")[0];
+  const certification = contentfulFilter(data, "certification");
+  const achievements = contentfulFilter(data, "achievement");
+  const works = contentfulFilter(data, "work");
+  const footer = contentfulFilter(data, "footer")[0];
 
-  let theme = createTheme({
-    typography: {
-      fontFamily: ['"Noto Sans JP"', "Arial", "sans-serif"].join(","),
-      fontSize: 16,
-
-      p: { color: "#6b767c" },
-      h1: { fontSize: 80 },
-      h2: { fontSize: 48, marginTop: 40, marginBottom: 20 },
-      h3: { fontSize: 26 },
-    },
-    palette: {
-      primary: {
-        main: "#282828",
-      },
-      secondary: {
-        main: "#495057",
-      },
-      accent: {
-        main: "#6283C2",
-      },
-      white: {
-        main: "#dddddd",
-      },
-    },
-  });
-  theme = responsiveFontSizes(theme);
+  const navItems = ["トップ", "スキル", "資格", "実績", "制作物"];
 
   return (
     <ThemeProvider theme={theme}>
-      <Head>
-        <title>Kubota&apos;s Portfolio</title>
-        <link
-          rel="icon"
-          type="image/x-icon"
-          href={top.fields.favicon.fields.file.url}
-        />
-      </Head>
       <CssBaseline />
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-3CGJWZE398" />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-3CGJWZE398');
-        `}
-      </Script>
-      <Box sx={{ display: "flex" }}>
-        <Sidebar>
-          <Avatar
-            src={top.fields.profile_icon.fields.file.url}
-            sx={{
-              width: 150,
-              height: 150,
-              border: 6,
-              borderColor: "#5e5e5e",
-              margin: 3,
-            }}
-          />
-          {["トップ", "スキル", "資格&実績", "制作物"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton
-                href={"#" + text}
-                sx={{
-                  "&:hover": {
-                    bgcolor: "accent.main",
-                  },
-                }}
-              >
-                <ListItemText primary={text} sx={{ textAlign: "center" }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </Sidebar>
-        <Box sx={{ width: "100%" }}>
-          <Top data={data}></Top>
-          <Skills data={data}></Skills>
-          <CertAndAchievements data={data}></CertAndAchievements>
-          <Works data={data}></Works>
-        </Box>
-      </Box>
+      <Background />
+      <Header navItems={navItems}></Header>
+      <Stack alignItems="center">
+        <Top></Top>
+        <Skills skills={skills}></Skills>
+        <Certification certification={certification}></Certification>
+        <Achievements achievements={achievements}></Achievements>
+        <Works works={works}></Works>
+      </Stack>
+      <Footer footer={footer}></Footer>
     </ThemeProvider>
   );
 }
 
-function Top({ data }) {
-  const top = contentfulFilter(data, "top")[0];
+function Top() {
+  return (
+    <Stack
+      justifyContent="center"
+      alignItems="center"
+      direction={{ xs: "column", md: "row" }}
+      spacing={4}
+      id="トップ"
+      sx={{ height: "100vh", width: "100%", backgroundColor: "primary.main" }}
+    >
+      <Box>
+        <Typography
+          variant="p"
+          sx={{ color: "white.main", paddingLeft: "5px" }}
+        >
+          UNIVERSITY STUDENT
+        </Typography>
+        <Typography variant="h1" sx={{ color: "white.main", fontSize: 80 }}>
+          KUBOTA
+        </Typography>
+      </Box>
+      <Avatar
+        src="/profile.png"
+        sx={{
+          width: { xs: 150, md: 200 },
+          height: { xs: 150, md: 200 },
+        }}
+      />
+    </Stack>
+  );
+}
+
+function Skills({ skills }) {
+  const [open, setOpen] = useState([
+    ...Array(skills.fields.skills.length).fill(false),
+  ]);
+  const [openOther, setOpenOther] = useState(false);
 
   return (
-    <Section id="トップ" height="100vh">
-      <Typography variant="h1">{top.fields.name}</Typography>
-      <p style={{ color: "#b8b8b8", fontSize: "1rem" }}>
-        Email: {top.fields.email}
-      </p>
-      <Typography
-        variant="p"
-        component="div"
-        sx={{ whiteSpace: "pre-wrap", mb: 3 }}
+    <Section name="スキル">
+      <Grid
+        container
+        columns={{ xs: 1, md: 2 }}
+        spacing={2}
+        sx={{ maxWidth: "800px" }}
       >
-        {top.fields.self_introduction}
-      </Typography>
-      <Stack spacing={3} direction="row">
-        {top.fields.social_icons.map((icon) => (
-          <SocialIcon
-            href={icon.fields.url}
-            imgUrl={icon.fields.img.fields.file.url}
-            key={icon.sys.id}
-          />
+        {skills.fields.skills.map((skill, index) => (
+          <Grid xs={1} key={skill.sys.id}>
+            <SkillCard
+              iconUrl={skill.fields.icon.fields.file.url}
+              text={skill.fields.name}
+              rank={skill.fields.rank}
+              onClick={() =>
+                setOpen(open.map((_, i) => (i === index ? true : false)))
+              }
+            ></SkillCard>
+            <CardDialog
+              open={open[index]}
+              handleClose={() => setOpen(open.map(() => false))}
+              title={skill.fields.name}
+            >
+              <Stack spacing={2}>
+                <Stack spacing={2} direction={"row"} alignItems="center">
+                  <Typography
+                    variant="p"
+                    className={skill.fields.class}
+                    sx={{ fontSize: 34 }}
+                  ></Typography>
+                  <Rating value={skill.fields.rank} readOnly />
+                </Stack>
+                <Typography variant="p" sx={{ whiteSpace: "pre-wrap" }}>
+                  {skill.fields.detail}
+                </Typography>
+              </Stack>
+            </CardDialog>
+          </Grid>
         ))}
-      </Stack>
+        {/* その他の項目を増やす場合は、以下をコメントアウト */}
+        {/* <Grid xs={1}>
+          <SkillCard
+            iconUrl={
+              "https://images.ctfassets.net/82ja9nmrxcu7/6GJUnr4O9VNz0LkLJxtLnV/39e279852a70c8d42a148d74c2e5e792/other.svg"
+            }
+            text={"その他"}
+            onClick={() => setOpenOther(true)}
+          ></SkillCard>
+        </Grid>
+        <CardDialog
+          open={openOther}
+          handleClose={() => setOpenOther(false)}
+          title={"その他"}
+        >
+          <Stack spacing={2}>
+            <Typography
+              variant="p"
+              sx={{ whiteSpace: "pre-wrap" }}
+            ></Typography>
+          </Stack>
+        </CardDialog> */}
+      </Grid>
     </Section>
   );
 }
 
-function Skills({ data }) {
-  const skills = contentfulFilter(data, "skills")[0];
-
+function Certification({ certification }) {
   return (
-    <Section id="スキル">
-      <Typography variant="h2">スキル</Typography>
-      <Typography variant="h3" sx={{ mb: 2 }}>
-        プログラミング言語＆ツール
-      </Typography>
+    <Section name="資格">
       <List>
-        {skills.fields.skills.map((skill) => (
-          <ListItem key={skill.sys.id}>
-            <Typography
-              variant="p"
-              className={skill.fields.class}
-              sx={{ fontSize: 34, mr: 2 }}
-            ></Typography>
-            <Typography variant="p">{skill.fields.description}</Typography>
+        {certification.map((certification) => (
+          <ListItem key={certification.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
+            <Box sx={{ mr: 1 }}>
+              <Image
+                src={certification.fields.icon.fields.file.url}
+                width={15}
+                height={15}
+                alt="check"
+              ></Image>
+            </Box>
+            <Typography variant="p">{certification.fields.name}</Typography>
           </ListItem>
         ))}
       </List>
@@ -177,68 +196,44 @@ function Skills({ data }) {
   );
 }
 
-function CertAndAchievements({ data }) {
-  const certifications = contentfulFilter(data, "certification");
-  const achievements = contentfulFilter(data, "achievement");
-
+function Achievements({ achievements }) {
   return (
-    <Section id="資格&実績">
-      <SubSection>
-        <Typography variant="h2">資格</Typography>
-        <List>
-          {certifications.map((certification) => (
-            <ListItem key={certification.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
-              <Box sx={{ mr: 1 }}>
-                <Image
-                  src={certification.fields.icon.fields.file.url}
-                  width={15}
-                  height={15}
-                  alt="check"
-                ></Image>
-              </Box>
-              <Typography variant="p">{certification.fields.name}</Typography>
-            </ListItem>
-          ))}
-        </List>
-      </SubSection>
-      <SubSection>
-        <Typography variant="h2">実績</Typography>
-        <List>
-          {achievements.map((achievement) => (
-            <ListItem key={achievement.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
-              <Box sx={{ mr: 1 }}>
-                <Image
-                  src={`https:${achievement.fields.icon.fields.file.url}`}
-                  width={20}
-                  height={20}
-                  alt="achievement"
-                ></Image>
-              </Box>
-              <Typography variant="p">{achievement.fields.name}</Typography>
-            </ListItem>
-          ))}
-        </List>
-      </SubSection>
+    <Section name="実績">
+      <List>
+        {achievements.map((achievement) => (
+          <ListItem key={achievement.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
+            <Box sx={{ mr: 1 }}>
+              <Image
+                src={`https:${achievement.fields.icon.fields.file.url}`}
+                width={20}
+                height={20}
+                alt="achievement"
+              ></Image>
+            </Box>
+            <Typography variant="p">{achievement.fields.name}</Typography>
+          </ListItem>
+        ))}
+      </List>
     </Section>
   );
 }
 
-function Works({ data }) {
-  const works = contentfulFilter(data, "work");
-  const [open, setOpen] = React.useState([...Array(works.length).fill(false)]);
+function Works({ works }) {
+  const [open, setOpen] = useState([...Array(works.length).fill(false)]);
 
   return (
-    <Section id="制作物">
-      <Typography variant="h2">制作物</Typography>
+    <Section name="制作物">
       <Grid
         container
         spacing={3}
-        columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-        sx={{ px: { xs: 2, md: 6 } }}
+        columns={{ xs: 1, sm: 2, md: 3 }}
+        sx={{
+          width: "100%",
+        }}
       >
         {works.map((work, index) => {
           return (
-            <Grid item xs={1} key={work.sys.id}>
+            <Grid xs={1} key={work.sys.id}>
               <Card sx={{ aspectRatio: 1.7777777 }}>
                 <CardActionArea
                   onClick={() =>
@@ -256,20 +251,19 @@ function Works({ data }) {
               <Typography color="text.secondary" align="center" sx={{ mt: 1 }}>
                 {work.fields.name}
               </Typography>
+
               <CardDialog
                 open={open[index]}
                 handleClose={() => setOpen(open.map(() => false))}
+                title={work.fields.name}
               >
-                <Typography variant="h3" sx={{ mb: 3 }}>
-                  {work.fields.name}
-                </Typography>
                 <Grid
                   container
                   spacing={2}
-                  direction="row-reverse"
+                  direction="row"
                   columns={{ xs: 1, md: 2 }}
                 >
-                  <Grid item xs={1}>
+                  <Grid xs={1}>
                     <Image
                       src={`https:${work.fields.img.fields.file.url}`}
                       alt="works"
@@ -278,18 +272,50 @@ function Works({ data }) {
                       style={{
                         width: "100%",
                         height: "auto",
+                        border: "solid 2px #eeeeee",
                       }}
                     />
                   </Grid>
-                  <Grid item xs={1}>
-                    <Typography
-                      variant="p"
-                      component="div"
-                      sx={{ whiteSpace: "pre-wrap", mb: 1 }}
-                    >
-                      {work.fields.description}
-                    </Typography>
-                    <Link href={work.fields.github_url}>GitHub</Link>
+                  <Grid xs={1}>
+                    <Stack spacing={3}>
+                      <Typography
+                        variant="p"
+                        component="div"
+                        sx={{ whiteSpace: "pre-wrap" }}
+                      >
+                        {work.fields.description}
+                      </Typography>
+                      <Box>
+                        <Typography
+                          variant="p"
+                          component="div"
+                          sx={{ marginBottom: "5px" }}
+                        >
+                          使用技術
+                        </Typography>
+                        <Grid container spacing={0.5}>
+                          {work.fields.technologyStack?.map(
+                            (technologyStack) => {
+                              return (
+                                <Grid key={technologyStack}>
+                                  <Chip label={technologyStack} size="small" />
+                                </Grid>
+                              );
+                            }
+                          )}
+                        </Grid>
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="p"
+                          component="div"
+                          sx={{ marginBottom: "4px" }}
+                        >
+                          リンク
+                        </Typography>
+                        <Link href={work.fields.github_url}>GitHub</Link>
+                      </Box>
+                    </Stack>
                   </Grid>
                 </Grid>
               </CardDialog>

@@ -1,20 +1,22 @@
-import * as React from "react";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import Image from "next/image";
 
-export default function SocialIcon({ href, imgUrl }) {
+export default function SocialIcon({ href, imgUrl, name }) {
   return (
-    <IconButton
-      onClick={() => window.open(href)}
-      sx={{
-        "&:hover": {
-          bgcolor: "accent.main",
-        },
-        bgcolor: "secondary.main",
-        p: 2,
-      }}
-    >
-      <Image src={imgUrl} width={24} height={24} alt="social icon"/>
-    </IconButton>
+    <Tooltip title={name}>
+      <IconButton
+        href={href}
+        sx={{
+          "&:hover": {
+            bgcolor: "accent.main",
+          },
+          bgcolor: "secondary.main",
+          p: 2,
+        }}
+      >
+        <Image src={imgUrl} width={24} height={24} alt={name} />
+      </IconButton>
+    </Tooltip>
   );
 }
