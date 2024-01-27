@@ -310,16 +310,15 @@ function Works({ works }) {
                           )}
                         </Grid>
                       </Box>
-                      <Box>
-                        <Typography
-                          variant="p"
-                          component="div"
-                          sx={{ marginBottom: "4px" }}
-                        >
-                          リンク
-                        </Typography>
+                      <Stack spacing={0.5}>
+                        <Typography variant="p">リンク</Typography>
                         <Link href={work.fields.github_url}>GitHub</Link>
-                      </Box>
+                        {work.fields.demoVideo && (
+                          <Link href={work.fields.demoVideo.fields.file.url}>
+                            デモ動画
+                          </Link>
+                        )}
+                      </Stack>
                     </Stack>
                   </Grid>
                 </Grid>
