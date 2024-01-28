@@ -59,7 +59,7 @@ export default function Background() {
   if (init) {
     return (
       <Particles
-        id="tsparticles"
+        className="fadeIn"
         particlesLoaded={particlesLoaded}
         options={options}
       />

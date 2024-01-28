@@ -80,14 +80,19 @@ function Top() {
       id="トップ"
       sx={{ height: "100vh", width: "100%", backgroundColor: "primary.main" }}
     >
-      <Box>
+      <Box sx={{ width: "302px"}}>
         <Typography
           variant="p"
           sx={{ color: "white.main", paddingLeft: "5px" }}
+          className="fadeIn"
         >
           UNIVERSITY STUDENT
         </Typography>
-        <Typography variant="h1" sx={{ color: "white.main", fontSize: 80 }}>
+        <Typography
+          variant="h1"
+          sx={{ color: "white.main", fontSize: 80 }}
+          className="fadeIn"
+        >
           KUBOTA
         </Typography>
       </Box>
@@ -97,6 +102,7 @@ function Top() {
           width: { xs: 150, md: 200 },
           height: { xs: 150, md: 200 },
         }}
+        className="fadeIn"
       />
     </Stack>
   );
