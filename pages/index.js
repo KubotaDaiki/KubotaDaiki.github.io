@@ -324,6 +324,11 @@ function Works({ works }) {
                             デモ動画
                           </Link>
                         )}
+                        {work.fields.chromeExtensionUrl && (
+                          <Link href={work.fields.chromeExtensionUrl}>
+                            Chrome ウェブストア
+                          </Link>
+                        )}
                       </Stack>
                     </Stack>
                   </Grid>
