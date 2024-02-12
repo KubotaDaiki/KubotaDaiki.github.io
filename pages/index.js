@@ -329,6 +329,11 @@ function Works({ works }) {
                             Chrome ウェブストア
                           </Link>
                         )}
+                        {work.fields.demoSite && (
+                          <Link href={work.fields.demoSite}>
+                            デモサイト
+                          </Link>
+                        )}
                       </Stack>
                     </Stack>
                   </Grid>
