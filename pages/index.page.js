@@ -1,4 +1,3 @@
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
@@ -9,7 +8,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -22,10 +20,10 @@ import CardDialog from "./components/CardDialog";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Section from "./components/Section";
-import SkillCard from "./components/SkillCard";
 import { theme } from "../styles/theme";
 import { Top } from "./components/Top";
 import { contentfulFilter } from "../libs/contentfulFilter";
+import { Skills } from "./components/Skills";
 
 export default function Home({ data }) {
   const skills = contentfulFilter(data, "skills")[0];
@@ -50,83 +48,6 @@ export default function Home({ data }) {
       </Stack>
       <Footer footer={footer}></Footer>
     </ThemeProvider>
-  );
-}
-
-function Skills({ skills }) {
-  const [open, setOpen] = useState([
-    ...Array(skills.fields.skills.length).fill(false),
-  ]);
-  const [openOther, setOpenOther] = useState(false);
-
-  return (
-    <Section name="スキル">
-      <Grid
-        container
-        columns={{ xs: 1, md: 2 }}
-        spacing={2}
-        sx={{ maxWidth: "800px" }}
-      >
-        {skills.fields.skills.map((skill, index) => (
-          <Grid xs={1} key={skill.sys.id}>
-            <SkillCard
-              iconUrl={skill.fields.icon.fields.file.url}
-              text={skill.fields.name}
-              rank={skill.fields.rank}
-              onClick={() =>
-                setOpen(open.map((_, i) => (i === index ? true : false)))
-              }
-            ></SkillCard>
-            <CardDialog
-              open={open[index]}
-              handleClose={() => setOpen(open.map(() => false))}
-              title={skill.fields.name}
-            >
-              <Stack spacing={2}>
-                <Stack spacing={2} direction={"row"} alignItems="center">
-                  <Image
-                    src={skill.fields.icon.fields.file.url}
-                    width={42}
-                    height={42}
-                    alt="skillIcon"
-                    style={{
-                      filter:
-                        "invert(29%) sepia(19%) saturate(296%) hue-rotate(169deg) brightness(90%) contrast(84%)",
-                    }}
-                  ></Image>
-                  <Rating value={skill.fields.rank} readOnly />
-                </Stack>
-                <Typography variant="p" sx={{ whiteSpace: "pre-wrap" }}>
-                  {skill.fields.detail}
-                </Typography>
-              </Stack>
-            </CardDialog>
-          </Grid>
-        ))}
-        {/* その他の項目を増やす場合は、以下をコメントアウト */}
-        {/* <Grid xs={1}>
-          <SkillCard
-            iconUrl={
-              "https://images.ctfassets.net/82ja9nmrxcu7/6GJUnr4O9VNz0LkLJxtLnV/39e279852a70c8d42a148d74c2e5e792/other.svg"
-            }
-            text={"その他"}
-            onClick={() => setOpenOther(true)}
-          ></SkillCard>
-        </Grid>
-        <CardDialog
-          open={openOther}
-          handleClose={() => setOpenOther(false)}
-          title={"その他"}
-        >
-          <Stack spacing={2}>
-            <Typography
-              variant="p"
-              sx={{ whiteSpace: "pre-wrap" }}
-            ></Typography>
-          </Stack>
-        </CardDialog> */}
-      </Grid>
-    </Section>
   );
 }
 
