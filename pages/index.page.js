@@ -13,7 +13,7 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import Image from "next/image";
 import { useState } from "react";
 import { client } from "../libs/client";
@@ -23,26 +23,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Section from "./components/Section";
 import SkillCard from "./components/SkillCard";
-
-const theme = createTheme({
-  typography: {
-    fontFamily: ['"Noto Sans JP"', "Arial", "sans-serif"].join(","),
-  },
-  palette: {
-    primary: {
-      main: "#282828",
-    },
-    secondary: {
-      main: "#495057",
-    },
-    accent: {
-      main: "#6283C2",
-    },
-    white: {
-      main: "#eeeeee",
-    },
-  },
-});
+import { theme } from "../styles/theme";
 
 export default function Home({ data }) {
   const skills = contentfulFilter(data, "skills")[0];
@@ -80,7 +61,7 @@ function Top() {
       id="トップ"
       sx={{ height: "100vh", width: "100%", backgroundColor: "primary.main" }}
     >
-      <Box sx={{ width: "302px"}}>
+      <Box sx={{ width: "302px" }}>
         <Typography
           variant="p"
           sx={{ color: "white.main", paddingLeft: "5px" }}
@@ -330,9 +311,7 @@ function Works({ works }) {
                           </Link>
                         )}
                         {work.fields.demoSite && (
-                          <Link href={work.fields.demoSite}>
-                            デモサイト
-                          </Link>
+                          <Link href={work.fields.demoSite}>デモサイト</Link>
                         )}
                       </Stack>
                     </Stack>
