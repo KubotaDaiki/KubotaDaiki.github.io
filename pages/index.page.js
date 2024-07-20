@@ -6,8 +6,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -25,6 +23,7 @@ import { Top } from "./components/Top";
 import { contentfulFilter } from "../libs/contentfulFilter";
 import { Certification } from "./components/Certification";
 import { Skills } from "./components/Skills";
+import { Achievements } from "./components/Achievements";
 
 export default function Home({ data }) {
   const skills = contentfulFilter(data, "skills")[0];
@@ -49,28 +48,6 @@ export default function Home({ data }) {
       </Stack>
       <Footer footer={footer}></Footer>
     </ThemeProvider>
-  );
-}
-
-function Achievements({ achievements }) {
-  return (
-    <Section name="実績">
-      <List>
-        {achievements.map((achievement) => (
-          <ListItem key={achievement.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
-            <Box sx={{ mr: 1 }}>
-              <Image
-                src={`https:${achievement.fields.icon.fields.file.url}`}
-                width={20}
-                height={20}
-                alt="achievement"
-              ></Image>
-            </Box>
-            <Typography variant="p">{achievement.fields.name}</Typography>
-          </ListItem>
-        ))}
-      </List>
-    </Section>
   );
 }
 
