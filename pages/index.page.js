@@ -23,6 +23,7 @@ import Section from "./components/Section";
 import { theme } from "../styles/theme";
 import { Top } from "./components/Top";
 import { contentfulFilter } from "../libs/contentfulFilter";
+import { Certification } from "./components/Certification";
 import { Skills } from "./components/Skills";
 
 export default function Home({ data }) {
@@ -48,28 +49,6 @@ export default function Home({ data }) {
       </Stack>
       <Footer footer={footer}></Footer>
     </ThemeProvider>
-  );
-}
-
-function Certification({ certification }) {
-  return (
-    <Section name="資格">
-      <List>
-        {certification.map((certification) => (
-          <ListItem key={certification.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
-            <Box sx={{ mr: 1 }}>
-              <Image
-                src={certification.fields.icon.fields.file.url}
-                width={15}
-                height={15}
-                alt="check"
-              ></Image>
-            </Box>
-            <Typography variant="p">{certification.fields.name}</Typography>
-          </ListItem>
-        ))}
-      </List>
-    </Section>
   );
 }
 
