@@ -25,6 +25,7 @@ import Section from "./components/Section";
 import SkillCard from "./components/SkillCard";
 import { theme } from "../styles/theme";
 import { Top } from "./components/Top";
+import { contentfulFilter } from "../libs/contentfulFilter";
 
 export default function Home({ data }) {
   const skills = contentfulFilter(data, "skills")[0];
@@ -287,10 +288,6 @@ function Works({ works }) {
       </Grid>
     </Section>
   );
-}
-
-function contentfulFilter(data, id) {
-  return data.items.filter((item) => item.sys.contentType.sys.id === id);
 }
 
 // データをテンプレートに受け渡す部分の処理を記述
