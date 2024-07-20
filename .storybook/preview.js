@@ -2,6 +2,7 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "../styles/theme";
+import Image from "next/image";
 
 export const decorators = [
   (Story) => {
@@ -23,6 +24,11 @@ const preview = {
       },
     },
   },
+};
+
+// 画像を表示させるため、Imageコンポーネントの最適化を無効
+Image.defaultProps = {
+  unoptimized: true,
 };
 
 export default preview;
