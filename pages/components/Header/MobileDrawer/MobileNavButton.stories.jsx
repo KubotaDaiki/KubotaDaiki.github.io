@@ -2,7 +2,7 @@ import { MobileNavButton } from "./MobileNavButton";
 
 export default {
   component: MobileNavButton,
-  title: "Header/MobileNavButton",
+  title: "Header/MobileDrawer/MobileNavButton",
   tags: ["autodocs"],
   parameters: {
     backgrounds: {
@@ -15,5 +15,4 @@ export const Default = {
   args: {
     item: "ホーム",
   },
-
 };

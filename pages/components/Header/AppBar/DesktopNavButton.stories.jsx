@@ -2,7 +2,7 @@ import { DesktopNavButton } from "./DesktopNavButton";
 
 export default {
   component: DesktopNavButton,
-  title: "Header/DesktopNavButton",
+  title: "Header/AppBar/DesktopNavButton",
   tags: ["autodocs"],
   parameters: {
     backgrounds: {
