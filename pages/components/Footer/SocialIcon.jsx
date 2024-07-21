@@ -2,7 +2,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Image from "next/image";
 
-export default function SocialIcon({ href, imgUrl, name }) {
+export function SocialIcon({ href, imgUrl, name }) {
   return (
     <Tooltip title={name}>
       <IconButton

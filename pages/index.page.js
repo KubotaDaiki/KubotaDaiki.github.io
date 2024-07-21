@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import { ThemeProvider } from "@mui/material/styles";
 import { client } from "../libs/client";
 import Background from "./components/Background";
-import Footer from "./components/Footer";
+import { Footer } from "./components/Footer";
 import Header from "./components/Header";
 import { theme } from "../styles/theme";
 import { Top } from "./components/Top";
