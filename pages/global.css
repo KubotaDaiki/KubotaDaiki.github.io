@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* その場で */
 .fadeIn {
   animation-name: fadeInAnime;
