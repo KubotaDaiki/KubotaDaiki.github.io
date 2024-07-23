@@ -59,7 +59,7 @@ export default function Background() {
   if (init) {
     return (
       <Particles
-        className="fadeIn"
+        className="animate-fadeInAnime"
         particlesLoaded={particlesLoaded}
         options={options}
       />
