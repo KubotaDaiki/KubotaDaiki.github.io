@@ -2,28 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* その場で */
-.fadeIn {
-  animation-name: fadeInAnime;
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInAnime {
-  0% {
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
 html {
   scroll-padding-top: 6rem;
 }
