@@ -1,24 +1,16 @@
-import Stack from "@mui/material/Stack";
 import { SocialIconList } from "./SocialIconList";
 import { Email } from "./Email";
 
 export function Footer({ footer }) {
   return (
-    <Stack
-      justifyContent="center"
-      alignItems="center"
-      spacing={2}
-      sx={{
-        height: "150px",
-        width: "100%",
-        backgroundColor: "secondary.main",
-        position: "relative",
-        zIndex: 10,
-        marginTop: "150px",
-      }}
-    >
+    <div className="
+        flex flex-col justify-center items-center gap-4
+        h-36 w-full mt-24
+        bg-secondary
+        relative z-10
+      ">
       <SocialIconList socialIcons={footer.fields.socialIcons}></SocialIconList>
       <Email>Email: kubotadaiki0654@gmail.com</Email>
-    </Stack>
+    </div>
   );
 }

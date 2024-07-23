@@ -1,9 +1,8 @@
-import Stack from "@mui/material/Stack";
 import { SocialIcon } from "./SocialIcon";
 
 export function SocialIconList({ socialIcons }) {
   return (
-    <Stack spacing={3} direction="row">
+    <div className="flex gap-4">
       {socialIcons.map((icon) => (
         <SocialIcon
           href={icon.fields.url}
@@ -12,6 +11,6 @@ export function SocialIconList({ socialIcons }) {
           key={icon.sys.id}
         />
       ))}
-    </Stack>
+    </div>
   );
 }

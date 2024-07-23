@@ -1,9 +1,7 @@
-import Typography from "@mui/material/Typography";
-
 export function Email({ children }) {
   return (
-    <Typography variant="p" sx={{ color: "white.main" }}>
+    <p className="text-white">
       {children}
-    </Typography>
+    </p>
   );
 }
