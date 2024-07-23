@@ -1,5 +1,3 @@
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import Image from "next/image";
 
 export function SocialIcon({ href, imgUrl, name }) {
