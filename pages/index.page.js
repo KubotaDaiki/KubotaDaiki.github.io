@@ -1,11 +1,7 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import Stack from "@mui/material/Stack";
-import { ThemeProvider } from "@mui/material/styles";
 import { client } from "../libs/client";
 import Background from "./components/Background";
 import { Footer } from "./components/Footer";
 import Header from "./components/Header";
-import { theme } from "../styles/theme";
 import { Top } from "./components/Top";
 import { contentfulFilter } from "../libs/contentfulFilter";
 import { Certification } from "./components/Certification";
@@ -23,19 +19,18 @@ export default function Home({ data }) {
   const navItems = ["トップ", "スキル", "資格", "実績", "制作物"];
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <div>
       <Background />
       <Header navItems={navItems}></Header>
-      <Stack alignItems="center">
+      <div className="flex flex-col items-center">
         <Top></Top>
         <Skills skills={skills}></Skills>
         <Certification certification={certification}></Certification>
         <Achievements achievements={achievements}></Achievements>
         <Works works={works}></Works>
-      </Stack>
+      </div>
       <Footer footer={footer}></Footer>
-    </ThemeProvider>
+    </div>
   );
 }
 
