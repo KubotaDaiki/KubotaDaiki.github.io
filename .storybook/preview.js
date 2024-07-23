@@ -1,6 +1,6 @@
 /** @type { import('@storybook/react').Preview } */
 import Image from "next/image";
-import "../pages/global.css";
+import "@/styles/global.css";
 
 export const decorators = [
   (Story) => {
