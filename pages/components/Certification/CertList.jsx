@@ -1,15 +1,13 @@
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import { CertListItem } from "./CertListItem";
 
 export function CertList({ certification }) {
   return (
-    <List>
+    <ul className="flex flex-col gap-4 pt-2">
       {certification.map((cert) => (
-        <ListItem key={cert.sys.id} sx={{ px: { xs: 0, md: 2 } }}>
+        <li key={cert.sys.id}>
           <CertListItem cert={cert}></CertListItem>
-        </ListItem>
+        </li>
       ))}
-    </List>
+    </ul>
   );
 }
