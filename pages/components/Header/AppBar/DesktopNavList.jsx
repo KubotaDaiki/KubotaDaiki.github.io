@@ -1,19 +1,11 @@
-import Box from "@mui/material/Box";
 import { DesktopNavButton } from "./DesktopNavButton";
 
 export function DesktopNavList(props) {
   return (
-    <Box
-      sx={{
-        display: {
-          xs: "none",
-          sm: "block",
-        },
-      }}
-    >
+    <div className="hidden sm:flex">
       {props.navItems?.map((item) => (
         <DesktopNavButton key={item} item={item}></DesktopNavButton>
       ))}
-    </Box>
+    </div>
   );
 }
