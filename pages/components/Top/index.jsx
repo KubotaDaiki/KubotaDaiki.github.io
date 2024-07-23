@@ -1,42 +1,32 @@
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import Image from "next/image";
 
 export function Top() {
   return (
-    <Stack
-      justifyContent="center"
-      alignItems="center"
-      direction={{ xs: "column", md: "row" }}
-      spacing={4}
+    <div
+      className="
+        w-full h-screen
+        flex flex-col sm:flex-row items-center justify-center gap-8
+        bg-primary
+      "
       id="トップ"
-      sx={{ height: "100vh", width: "100%", backgroundColor: "primary.main" }}
     >
-      <Box sx={{ width: "302px" }}>
-        <Typography
-          variant="p"
-          sx={{ color: "white.main", paddingLeft: "5px" }}
-          className="fadeIn"
-        >
+      <div>
+        <p className="text-white pl-1 animate-fadeInAnime">
           UNIVERSITY STUDENT
-        </Typography>
-        <Typography
-          variant="h1"
-          sx={{ color: "white.main", fontSize: 80 }}
-          className="fadeIn"
-        >
+        </p>
+        <h1 className="text-white text-[5rem] leading-none animate-fadeInAnime">
           KUBOTA
-        </Typography>
-      </Box>
-      <Avatar
-        src="/profile.png"
-        sx={{
-          width: { xs: 150, md: 200 },
-          height: { xs: 150, md: 200 },
-        }}
-        className="fadeIn"
-      />
-    </Stack>
+        </h1>
+      </div>
+      <div className="relative w-40 md:w-52 h-40 md:h-52 animate-fadeInAnime">
+        <Image
+          src="/profile.png"
+          className="object-cover rounded-full"
+          alt="profile-image"
+          sizes="50vw"
+          fill
+        />
+      </div>
+    </div>
   );
 }
