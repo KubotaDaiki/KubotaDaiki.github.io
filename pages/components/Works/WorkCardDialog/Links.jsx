@@ -1,11 +1,7 @@
-import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-
 export function Links({ work }) {
   return (
-    <Stack spacing={0.5}>
-      <Typography variant="p">リンク</Typography>
+    <div className="flex flex-col gap-1">
+      <p>リンク</p>
       <Link href={work.fields.github_url}>GitHub</Link>
       {work.fields.demoVideo && (
         <Link href={work.fields.demoVideo.fields.file.url}>デモ動画</Link>
@@ -16,6 +12,12 @@ export function Links({ work }) {
       {work.fields.demoSite && (
         <Link href={work.fields.demoSite}>デモサイト</Link>
       )}
-    </Stack>
+    </div>
+  );
+}
+
+function Link({ href, children }) {
+  return (
+    <a href={href} className="underline decoration-[#b7b7b7] hover:decoration-[#000000]">{children}</a>
   );
 }

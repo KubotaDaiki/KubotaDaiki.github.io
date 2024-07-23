@@ -1,23 +1,18 @@
-import Grid from "@mui/material/Unstable_Grid2";
 import { WorkGridItem } from "./WorkGridItem";
 
 export function WorkGrid({ works }) {
   return (
-    <Grid
-      container
-      spacing={3}
-      columns={{ xs: 1, sm: 2, md: 3 }}
-      sx={{
-        width: "100%",
-      }}
-    >
+    <div className="
+      grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
+      w-[90vw] sm:w-[80vw] md:w-[70vw]
+      ">
       {works.map((work) => {
         return (
-          <Grid xs={1} key={work.sys.id}>
+          <div className="p-3" key={work.sys.id}>
             <WorkGridItem work={work}></WorkGridItem>
-          </Grid>
+          </div>
         );
       })}
-    </Grid>
+    </div>
   );
 }
