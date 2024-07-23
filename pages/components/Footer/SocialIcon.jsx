@@ -4,19 +4,13 @@ import Image from "next/image";
 
 export function SocialIcon({ href, imgUrl, name }) {
   return (
-    <Tooltip title={name}>
-      <IconButton
-        href={href}
-        sx={{
-          "&:hover": {
-            bgcolor: "accent.main",
-          },
-          bgcolor: "secondary.main",
-          p: 2,
-        }}
-      >
-        <Image src={imgUrl} width={24} height={24} alt={name} />
-      </IconButton>
-    </Tooltip>
+    <a
+      href={href}
+      className="
+      bg-secondary hover:bg-accent transition duration-200
+      p-4 rounded-full"
+    >
+      <Image src={imgUrl} width={24} height={24} alt={name} />
+    </a>
   );
 }
