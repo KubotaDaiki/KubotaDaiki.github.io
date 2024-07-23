@@ -11,11 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^2.1.2",
-    "@mui/icons-material": "^5.14.18",
-    "@mui/material": "^5.14.18",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.1.0",
     "contentful": "^10.6.13",

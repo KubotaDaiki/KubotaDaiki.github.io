@@ -1,18 +1,10 @@
 /** @type { import('@storybook/react').Preview } */
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { theme } from "../styles/theme";
 import Image from "next/image";
-import "../pages/global.css"
+import "../pages/global.css";
 
 export const decorators = [
   (Story) => {
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Story />
-      </ThemeProvider>
-    );
+    return <Story />;
   },
 ];
 

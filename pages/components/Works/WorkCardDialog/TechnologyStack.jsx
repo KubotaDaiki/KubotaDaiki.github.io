@@ -1,8 +1,3 @@
-import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2";
-
 export function TechnologyStack({ technologyStack }) {
   return (
     <div>
