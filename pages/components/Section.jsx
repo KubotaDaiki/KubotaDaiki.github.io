@@ -1,21 +1,12 @@
-import Stack from "@mui/material/Stack";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-
 export default function Section({ children, name }) {
   return (
     <>
-      <Toolbar id={name} />
-      <Stack
-        alignItems="center"
-        spacing={2}
-        sx={{ marginY: "50px", width: { xs: "90%", sm: "80%", md: "70%" } }}
-      >
-        <Typography variant="h2" sx={{ fontSize: 48 }}>
+      <div className="flex flex-col items-center my-16">
+        <h2 className="text-5xl mb-4" id={name}>
           {name}
-        </Typography>
+        </h2>
         {children}
-      </Stack>
+      </div>
     </>
   );
 }
