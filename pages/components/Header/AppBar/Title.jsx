@@ -1,14 +1,7 @@
-import Typography from "@mui/material/Typography";
-
 export function Title({ children }) {
   return (
-    <Typography
-      variant="h6"
-      sx={{
-        flexGrow: 1,
-      }}
-    >
+    <p className="text-xl text-white">
       {children}
-    </Typography>
+    </p>
   );
 }

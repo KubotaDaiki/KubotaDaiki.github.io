@@ -1,17 +1,15 @@
-import Button from "@mui/material/Button";
-
 export function DesktopNavButton({ item }) {
   return (
-    <Button
-      sx={{
-        color: "white.main",
-        "&:hover": {
-          backgroundColor: "accent.main",
-        },
-      }}
+    <a
+      className="
+        w-16 h-9 py-1.5 px-2
+        flex justify-center items-center
+        text-white hover:bg-accent
+        text-sm rounded transition
+      "
       href={"#" + item}
     >
       {item}
-    </Button>
+    </a>
   );
 }
