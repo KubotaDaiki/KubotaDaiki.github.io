@@ -1,24 +1,22 @@
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import Image from "next/image";
 
 export function WorkCard({ work, onClick }) {
   return (
-    <>
-      <Card sx={{ aspectRatio: 1.7777777 }}>
-        <CardActionArea onClick={onClick} sx={{ height: "100%" }}>
-          <CardMedia
-            sx={{ height: "100%" }}
-            image={work.fields.img.fields.file.url}
-          />
-          <CardContent></CardContent>
-        </CardActionArea>
-      </Card>
-      <Typography color="text.secondary" align="center" sx={{ mt: 1 }}>
+    <div>
+      <button className="relative w-full aspect-video shadow-md" onClick={onClick}>
+        <Image
+          src={`https:${work.fields.img.fields.file.url}`}
+          className="
+            object-cover rounded
+            hover:brightness-95 transition duration-200
+          "
+          sizes="50vw"
+          fill
+        />
+      </button>
+      <p className="text-secondary mt-1 text-center">
         {work.fields.name}
-      </Typography>
-    </>
+      </p>
+    </div>
   );
 }

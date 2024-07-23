@@ -5,19 +5,17 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 export function TechnologyStack({ technologyStack }) {
   return (
-    <Box>
-      <Typography variant="p" component="div" sx={{ marginBottom: "5px" }}>
+    <div>
+      <p className="mb-2">
         使用技術
-      </Typography>
-      <Grid container spacing={0.5}>
+      </p>
+      <div className="flex gap-x-1 gap-y-2 flex-wrap">
         {technologyStack?.map((t) => {
           return (
-            <Grid key={t}>
-              <Chip label={t} size="small" />
-            </Grid>
+            <p key={t} className="text-sm px-2 py-0.5 rounded-xl bg-[#ebebeb]">{t}</p>
           );
         })}
-      </Grid>
-    </Box>
+      </div>
+    </div>
   );
 }

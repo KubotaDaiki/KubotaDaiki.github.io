@@ -1,9 +1,7 @@
-import Typography from "@mui/material/Typography";
-
 export function Description({ children }) {
   return (
-    <Typography variant="p" component="div" sx={{ whiteSpace: "pre-wrap" }}>
+    <p className="whitespace-pre-wrap">
       {children}
-    </Typography>
+    </p>
   );
 }
