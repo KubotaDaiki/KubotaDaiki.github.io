@@ -1,6 +1,6 @@
 import { StarRating } from "./StarRating";
 import Image from "next/image";
-import CardDialog from "../CardDialog";
+import CardDialog from "@/components/CardDialog";
 
 export function SkillCardDialog({ skill, open, onClose }) {
   return (

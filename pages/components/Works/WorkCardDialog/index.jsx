@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CardDialog from "../../CardDialog";
+import CardDialog from "@/components/CardDialog";
 import { Links } from "./Links";
 import { Description } from "./Description";
 import { TechnologyStack } from "./TechnologyStack";
