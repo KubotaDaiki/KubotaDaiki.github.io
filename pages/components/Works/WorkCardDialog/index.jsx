@@ -11,7 +11,7 @@ export function WorkCardDialog({ work, open, onClose }) {
         <div className="flex-1">
           <Image
             src={`https:${work.fields.img.fields.file.url}`}
-            alt="works"
+            alt={work.fields.name + "のイメージ画像"}
             width={1920}
             height={1080}
             className="w-full h-auto border-2 border-[#eeeeee]"

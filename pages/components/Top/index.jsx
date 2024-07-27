@@ -22,7 +22,7 @@ export function Top() {
         <Image
           src="/profile.png"
           className="object-cover rounded-full"
-          alt="profile-image"
+          alt="プロフィール画像"
           sizes="50vw"
           fill
         />

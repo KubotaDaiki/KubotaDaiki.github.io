@@ -10,7 +10,7 @@ export function SkillCardDialog({ skill, open, onClose }) {
           src={skill.fields.icon.fields.file.url}
           width={42}
           height={42}
-          alt="skillIcon"
+          alt=""
           style={{
             filter:
               "invert(29%) sepia(19%) saturate(296%) hue-rotate(169deg) brightness(90%) contrast(84%)",

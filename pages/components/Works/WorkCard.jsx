@@ -12,6 +12,7 @@ export function WorkCard({ work, onClick }) {
           "
           sizes="50vw"
           fill
+          alt={work.fields.name + "のイメージ画像"}
         />
       </button>
       <p className="text-secondary mt-1 text-center">
