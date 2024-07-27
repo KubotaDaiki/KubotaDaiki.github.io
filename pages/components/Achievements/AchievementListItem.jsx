@@ -7,7 +7,7 @@ export function AchievementListItem({ achievement }) {
         src={`https:${achievement.fields.icon.fields.file.url}`}
         width={20}
         height={20}
-        alt="achievement"
+        alt=""
       ></Image>
       <p>{achievement.fields.name}</p>
     </div>

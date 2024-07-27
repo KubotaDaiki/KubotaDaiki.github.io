@@ -7,7 +7,7 @@ export function CertListItem({ cert }) {
         src={cert.fields.icon.fields.file.url}
         width={15}
         height={15}
-        alt="check"
+        alt=""
       ></Image>
       <p>{cert.fields.name}</p>
     </div>
