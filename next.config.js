@@ -10,5 +10,6 @@ module.exports = {
       },
     ],
   },
+  output: "export",
   pageExtensions: ["page.jsx", "page.js"],
 };
